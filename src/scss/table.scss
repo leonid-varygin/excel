@@ -91,10 +91,10 @@
   .row-resize {
     left: 0;
     height: 4px;
-    background-color: $primary-color;
 
     &:hover {
       cursor: row-resize;
     }
   }
+
 }

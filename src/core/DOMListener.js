@@ -1,13 +1,14 @@
-import {capitalize} from '@core/utils';
+import {capitalize} from '@core/utils'
 
-export class DOMListener {
+export class DomListener {
   constructor($root, listeners = []) {
     if (!$root) {
-      throw new Error(`No root provided DOM Listener`)
+      throw new Error(`No $root provided for DomListener!`)
     }
     this.$root = $root
     this.listeners = listeners
   }
+
   initDOMListeners() {
     this.listeners.forEach(listener => {
       const method = getMethodName(listener)
@@ -18,9 +19,11 @@ export class DOMListener {
         )
       }
       this[method] = this[method].bind(this)
+      // Тоже самое что и addEventListener
       this.$root.on(listener, this[method])
     })
   }
+
   removeDOMListeners() {
     this.listeners.forEach(listener => {
       const method = getMethodName(listener)
@@ -33,3 +36,5 @@ export class DOMListener {
 function getMethodName(eventName) {
   return 'on' + capitalize(eventName)
 }
+
+
